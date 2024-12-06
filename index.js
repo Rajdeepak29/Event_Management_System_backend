@@ -7,18 +7,28 @@ const app = express();
 // Body parser middleware
 
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use(bodyParser.json());
 
-// Use CORS middleware
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Allow requests from this origin
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allow specific HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
-  })
-);
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "http://localhost:3000",
+    "https://dreamland-admin.vercel.app",
+    "https://dreamland-client.vercel.app"
+  );
 
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE,PATCH, OPIONS"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 // User routes
 app.use("/api", userRoutes);
 
