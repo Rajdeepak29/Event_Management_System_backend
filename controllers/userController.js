@@ -73,7 +73,6 @@ exports.login = (req, res) => {
         .status(500)
         .json({ message: "Database query error", success: false });
     }
-
     if (result.length === 0) {
       return res
         .status(400)
