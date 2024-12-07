@@ -200,7 +200,6 @@ exports.allevent = (req, res) => {
     res.status(200).json({ success: true, events: result });
   });
 };
-
 exports.deleteEvent = (req, res) => {
   const { Id } = req.params;
   const query = "DELETE FROM addevent WHERE Id = ?";
